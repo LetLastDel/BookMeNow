@@ -4,7 +4,7 @@
 
 __Тест проект на позицию Junior iOS-developer.__ 
 
- [Видео-превью здесь]([https://pages.github.com/](https://youtu.be/rcSDKzTWTAk))
+ Видео-превью по ссылке https://youtu.be/rcSDKzTWTAk
 
 ##  Стэк:
 
