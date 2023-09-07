@@ -17,6 +17,16 @@ struct TouristStackExt: View {
                        3:"Четвертый",
                        4:"Пятый"]
     
+    @State var isValidName = false
+    @State var isValidSurname = false
+    @State var isValidBirthDate = false
+    @State var isValidNationality = false
+    @State var isValidPassport = false
+    @State var isValidExp = false
+
+    
+    
+    
     
     var body: some View {
         VStack {
