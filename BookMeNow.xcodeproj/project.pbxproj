@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E0C6B7C2AA3B29E0010BDCD /* ImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C6B7B2AA3B29E0010BDCD /* ImageExt.swift */; };
 		2E0C6B7E2AA3B85D0010BDCD /* TopBarStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C6B7D2AA3B85D0010BDCD /* TopBarStack.swift */; };
+		2E1F35392AAA1FB90009FC8E /* KeyboardExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1F35382AAA1FB90009FC8E /* KeyboardExt.swift */; };
 		2E6060172AA1CEB700F404EC /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6060162AA1CEB700F404EC /* NetworkService.swift */; };
 		2E6060192AA1CED400F404EC /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6060182AA1CED400F404EC /* URLManager.swift */; };
 		2E60601B2AA1D05200F404EC /* ErrorEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60601A2AA1D05200F404EC /* ErrorEnum.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		2E0C6B7B2AA3B29E0010BDCD /* ImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExt.swift; sourceTree = "<group>"; };
 		2E0C6B7D2AA3B85D0010BDCD /* TopBarStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarStack.swift; sourceTree = "<group>"; };
+		2E1F35382AAA1FB90009FC8E /* KeyboardExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardExt.swift; sourceTree = "<group>"; };
 		2E6060162AA1CEB700F404EC /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2E6060182AA1CED400F404EC /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		2E60601A2AA1D05200F404EC /* ErrorEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorEnum.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				2EAD69F22AA0E9120076D4F4 /* TextFieldExt.swift */,
 				2EAD69E62AA0BDE50076D4F4 /* ButtonExt.swift */,
 				2E71522C2AA4A25A00ED1DB5 /* BlueButtonExt.swift */,
+				2E1F35382AAA1FB90009FC8E /* KeyboardExt.swift */,
 				2E7152252AA48E2F00ED1DB5 /* Modifires */,
 				2E7152242AA4759A00ED1DB5 /* StackExt */,
 			);
@@ -302,6 +305,7 @@
 				2E0C6B7E2AA3B85D0010BDCD /* TopBarStack.swift in Sources */,
 				2E6060322AA2200E00F404EC /* RegexEnum.swift in Sources */,
 				2EAD69E02AA07E410076D4F4 /* MainView.swift in Sources */,
+				2E1F35392AAA1FB90009FC8E /* KeyboardExt.swift in Sources */,
 				2E60601B2AA1D05200F404EC /* ErrorEnum.swift in Sources */,
 				2E71522B2AA4A1A000ED1DB5 /* TextExt.swift in Sources */,
 				2EAD69EF2AA0DF9E0076D4F4 /* BookingView.swift in Sources */,

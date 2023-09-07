@@ -11,21 +11,19 @@ struct TouristStackExt: View {
     var index: Int
     @State var pushed = false
     var paymentButtonPressed: Bool
+
+    @State private var birthTap = false
+    @State private var birthDate = Date()
+    @State private var passportTap = false
+    @State private var passportDate = Date()
+    
     var dictiontary = [0: "Первый",
                        1:"Второй",
                        2:"Третий",
                        3:"Четвертый",
                        4:"Пятый"]
-    
-    @State var isValidName = false
-    @State var isValidSurname = false
-    @State var isValidBirthDate = false
-    @State var isValidNationality = false
-    @State var isValidPassport = false
-    @State var isValidExp = false
 
-    
-    
+
     
     
     var body: some View {
@@ -52,11 +50,11 @@ struct TouristStackExt: View {
                         TextFieldExt(fieldName: "Имя", text: $tourist.name, paymentButtonPressed: paymentButtonPressed)
                         TextFieldExt(fieldName: "Фамилия", text: $tourist.surname, paymentButtonPressed: paymentButtonPressed)
                         TextFieldExt(fieldName: "Дата рождения", text: $tourist.birthDate, paymentButtonPressed: paymentButtonPressed)
-                            .keyboardType(.numberPad)
-                            .onChange(of: tourist.birthDate) { newValue in
-                                DispatchQueue.main.async {
-                                    tourist.birthDate = tourist.birthDate.formattedMask(text: tourist.birthDate,  mask: "XX.XX.XXXX")
-                                }
+                            .onTapGesture {
+                                    self.birthTap.toggle()
+                            }
+                            .sheet(isPresented: $birthTap) {
+                                KeyboardExt(taped: $birthTap, date: $birthDate, text: $tourist.birthDate)
                             }
                         TextFieldExt(fieldName: "Гражданство", text: $tourist.nationality, paymentButtonPressed: paymentButtonPressed)
                         TextFieldExt(fieldName: "Номер загранпаспорта", text: $tourist.passport, paymentButtonPressed: paymentButtonPressed)
@@ -67,11 +65,11 @@ struct TouristStackExt: View {
                                 }
                             }
                         TextFieldExt(fieldName: "Срок действия загранпаспорта", text: $tourist.exp, paymentButtonPressed: paymentButtonPressed)
-                            .keyboardType(.numberPad)
-                            .onChange(of: tourist.exp) { newValue in
-                                DispatchQueue.main.async {
-                                    tourist.exp = tourist.exp.formattedMask(text: tourist.exp,  mask: "XX.XX.XXXX")
-                                }
+                            .onTapGesture {
+                                    self.passportTap.toggle()
+                            }
+                            .sheet(isPresented: $passportTap) {
+                                KeyboardExt(taped: $passportTap, date: $passportDate, text: $tourist.exp)
                             }
                     }.padding()
                 }
@@ -82,7 +80,3 @@ struct TouristStackExt: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-//    .onChange(of: viewModel.number) { newValue in
-//        let formattedNumber = newValue.hasPrefix("+7") ? newValue : "+7" + newValue
-//        viewModel.number = formattedNumber.phoneMask(text: formattedNumber, mask: "+x (xxx) xxx-xx-xx")
-//    }
