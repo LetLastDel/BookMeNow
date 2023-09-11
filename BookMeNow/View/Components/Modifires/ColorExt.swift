@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension Color {
-    
     static var errorColor: Color{
         return Color("red")
     }

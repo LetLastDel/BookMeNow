@@ -11,7 +11,6 @@ struct RoomView: View {
     var hotel: HotelModel
     @StateObject var viewModel = RoomsViewModel()
     @Environment(\.presentationMode) var presentationMode
-
     
     var body: some View {
         VStack{
@@ -35,6 +34,7 @@ struct RoomView: View {
         }
     }
 }
+
 struct RoomView_Previews: PreviewProvider {
     static var previews: some View {
         RoomView(hotel: HotelModel(id: 1, name: "Луночный отель в Хугареы", adress: "", minimalPrice: 1, priceForIt: "", rating: 1, ratingName: "", imageUrls: [], aboutTheHotel: HotelModel.AboutTheHotel(description: "", peculiarities: [])))

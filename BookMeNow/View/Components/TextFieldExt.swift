@@ -14,7 +14,6 @@ struct TextFieldExt: View {
     var promt: Bool?
     var paymentButtonPressed: Bool
 
-    
     var body: some View {
         VStack(alignment: .leading){
             if taped || !text.isEmpty {

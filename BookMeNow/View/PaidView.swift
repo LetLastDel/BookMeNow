@@ -17,13 +17,12 @@ struct PaidView: View {
             Spacer()
             Image("paid")
             Text("Ваш заказ принят в работу")
-                .font(Font.custom("SF Pro Display", size: 22))
+                .font(Fonts.customFontHeavy22px)
             VStack(alignment: .center){
                 Text("Подтверждение заказа №\(randomNumber.description) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
                     .multilineTextAlignment(.center)
-                    .font(Font.custom("SF Pro Display", size: 16))
+                    .font(Fonts.customFontRegular16px)
                     .foregroundColor(.gray)
-
             }
            Spacer()
         }
@@ -37,7 +36,6 @@ struct PaidView: View {
                         rootViewController.dismiss(animated: true, completion: nil)
                     }
                 }, text: "Cупер!")
-
             }
             .ignoresSafeArea()
             .background(.white)

@@ -22,16 +22,13 @@ struct TouristStackExt: View {
                        2:"Третий",
                        3:"Четвертый",
                        4:"Пятый"]
-
-
-    
     
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
                 HStack {
                     Text("\(dictiontary[index] ?? "") турист")
-                        .font(Font.custom("SF Pro Display", size: 22))
+                        .font(Fonts.customFontHeavy22px)
                     Spacer()
                     Button {
                         withAnimation {

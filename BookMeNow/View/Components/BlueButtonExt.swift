@@ -10,13 +10,14 @@ import SwiftUI
 struct BlueButtonExt: View {
     var action: () -> Void
     var text: String
+    
     var body: some View {
         VStack{
             Button{
                 action()
             } label: {
                 Text(text)
-                    .font(Font.custom("SF Pro Display", size: 16))
+                    .font(Fonts.customFontRegular16px)
                     .frame(maxWidth: .infinity, maxHeight: 45)
                     .foregroundColor(.white)
                     .background(.blue)
@@ -28,8 +29,3 @@ struct BlueButtonExt: View {
     }
 }
 
-//struct BlueButtonExt_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BlueButtonExt()
-//    }
-//}

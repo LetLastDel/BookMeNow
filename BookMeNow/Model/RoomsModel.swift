@@ -10,7 +10,6 @@ import Foundation
 struct RoomsModel: Decodable{
     let rooms: [Rooms]
     
-    
     struct Rooms: Decodable, Identifiable{
         var id: Int
         var name: String
@@ -20,6 +19,7 @@ struct RoomsModel: Decodable{
         var imageUrls: [String]
     }
 }
+
 private enum CodingKeys: String, CodingKey {
     case id, name, price, pricePer = "price_per", peculiarities, imageUrls = "image_urls"
 }

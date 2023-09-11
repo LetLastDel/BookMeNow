@@ -14,9 +14,7 @@ struct BookingView: View {
     private var maxTouristCount: Bool { viewModel.tourist.count >= 5 ? false : true }
     @State var goToPaidView = false
     @Environment(\.presentationMode) var presentationMode
-
-
-
+    
     var body: some View {
         VStack{
             TopBarStack(title: "Бронирование", presentationMode: presentationMode)
@@ -26,11 +24,11 @@ struct BookingView: View {
                         HoratingStackExt(horating: viewModel.booking?.horating ?? 0, horatingName: viewModel.booking?.ratingName ?? "")
                         VStack(alignment: .leading){
                             Text(viewModel.booking?.hotelName ?? "")
-                                .font(Font.custom("SF Pro Display", size: 22))
+                                .font(Fonts.customFontHeavy22px)
                             Button(viewModel.booking?.hotelAdress ?? "") {
                                 print("Нажата кнопка с адрессом")
                             }.frame(maxWidth: .infinity, alignment: .leading)
-                                .font(Font.custom("SF Pro Display", size: 14))
+                                .font(Fonts.customFontRegular14px)
                         }
                     }
                     .padding()
@@ -40,7 +38,7 @@ struct BookingView: View {
                     VStack{
                         VStack(alignment: .leading){
                             Text("Информация о покупателе")
-                                .font(Font.custom("SF Pro Display", size: 22))
+                                .font(Fonts.customFontHeavy22px)
                             ZStack(alignment: .leadingLastTextBaseline) {
                                 TextFieldExt(fieldName: "Номер телефона", text: $viewModel.number, promt: viewModel.phoneError, paymentButtonPressed: paymentButtonPressed)
                                     .keyboardType(.numberPad)
@@ -61,9 +59,8 @@ struct BookingView: View {
                             }
                             TextFieldExt(fieldName: "Почта", text: $viewModel.email, promt: viewModel.emailError, paymentButtonPressed: paymentButtonPressed)
                             Text("Эти данные никому не передаются. После оплаты мы вышлем чек на указанный Вами номер и почту")
-                                .font(Font.custom("SF Pro Display", size: 14))
+                                .font(Fonts.customFontRegular14px)
                                 .foregroundColor(.gray)
-
                         }.padding()
                     }
                     .background(.white)
@@ -76,8 +73,7 @@ struct BookingView: View {
                         }
                         HStack{
                             Text(maxTouristCount ? "Добавить туриста" : "Максимальное количетсво туристов")
-                                .font(Font.custom("SF Pro Display", size: 22))
-
+                                .font(Fonts.customFontHeavy22px)
                                 .padding()
                             Spacer()
                             Button {
@@ -129,9 +125,7 @@ struct BookingView: View {
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-    }
-
-
+}
 
 struct BookingView_Previews: PreviewProvider {
     static var previews: some View {

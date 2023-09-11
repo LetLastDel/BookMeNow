@@ -16,12 +16,11 @@ struct DataStackExt: View {
                 HStack{
                     Text(key)
                         .foregroundColor(.gray)
-                        .font(Font.custom("SF Pro Display", size: 16))
+                        .font(Fonts.customFontRegular16px)
                         .frame(width: 150, alignment: .leading)
                     if spacer{ Spacer() }
                     Text(value ?? "")
-                        .font(Font.custom("SF Pro Display", size: 16))
-
+                        .font(Fonts.customFontRegular16px)
                 }
                 .padding(.bottom, 15)
             }
@@ -32,9 +31,3 @@ struct DataStackExt: View {
         .cornerRadius(10)
     }
 }
-
-//struct DataStackExt_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DataStackExt()
-//    }
-//}

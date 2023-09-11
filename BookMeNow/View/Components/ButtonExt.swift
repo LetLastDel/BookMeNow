@@ -11,6 +11,7 @@ struct ButtonExt: View {
     var text: String
     var image: String
     @State var pushed = false
+    var showDivider: Bool
     
     var body: some View {
         HStack {
@@ -33,6 +34,9 @@ struct ButtonExt: View {
                 }
             } label: {
                 Image(pushed ? "arrow" : "arrow")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 25)
                     .rotationEffect(Angle(degrees: pushed ? 90 : 0))
             }
             .foregroundColor(.gray)
@@ -40,19 +44,19 @@ struct ButtonExt: View {
         .padding(.horizontal, 10)
         .background(.gray.opacity(0.05))
         .frame(height: pushed ? nil : 45)
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .frame(height: 1)
+        .overlay(alignment: .bottom) {
+            if showDivider{
+                Divider()
                     .padding(.horizontal, 15)
-                    .foregroundColor(.gray.opacity(0.3))
-                    .offset(y:-2)
+                    .offset(y:-2.5)
             }
+        }
         
     }
 }
 
 struct ButtonExt_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonExt(text: "Удобства", image: "ok")
+        ButtonExt(text: "Удобства", image: "ok", showDivider: true)
     }
 }

@@ -13,8 +13,8 @@ struct HoratingStackExt: View {
     var body: some View {
         HStack{
             Image(systemName: "star.fill")
-            Text("\(horating ?? 0)")
-            Text(horatingName ?? "")
+            Text("\(horating)")
+            Text(horatingName)
         }
         .foregroundColor(.orange.opacity(0.7))
         .padding(4)
@@ -22,8 +22,3 @@ struct HoratingStackExt: View {
         .cornerRadius(5)    }
 }
 
-//struct HoratingStackExt_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HoratingStackExt()
-//    }
-//}

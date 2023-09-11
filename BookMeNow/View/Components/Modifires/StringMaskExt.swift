@@ -25,6 +25,7 @@ extension String {
             return result
         }
     }
+
 extension String {
     static func formatCurrency(name: String? = "₽", value: Int) -> String {
         let formatter = NumberFormatter()

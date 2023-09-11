@@ -12,7 +12,7 @@ struct PeculiaritiesHStaclExt: View {
     var body: some View {
         HStack{
             Text(text)
-                .font(Font.custom("SF Pro Display", size: 16))
+                .font(Fonts.customFontRegular16px)
                 .foregroundColor(.gray)
         }
         .padding(4)
@@ -20,6 +20,7 @@ struct PeculiaritiesHStaclExt: View {
         .cornerRadius(5)
     }
 }
+
 struct HStackExt_Previews: PreviewProvider {
     static var previews: some View {
         PeculiaritiesHStaclExt(text: "Бесплатный Wifi на всей территории отеля")

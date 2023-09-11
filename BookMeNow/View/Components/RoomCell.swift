@@ -15,12 +15,14 @@ struct RoomCell: View {
         VStack(alignment: .leading){
             ImageGallery(urls: room.imageUrls)
             Text(room.name)
-                .font(Font.custom("SF Pro Display", size: 22))
-            PeculiaritiesStackExt(peculiarities: room.peculiarities)
+                .font(Fonts.customFontHeavy22px)
+            FlexibleView(data: room.peculiarities) { pecul in
+                PeculiaritiesHStaclExt(text: pecul)
+            }
             Button("Подробнее о номере >") {
                 print("Нажал подробнее о номере")
             }
-            .font(Font.custom("SF Pro Display", size: 16))
+            .font(Fonts.customFontRegular16px)
             .buttonStyle(PlainButtonStyle())
             .foregroundColor(.blue)
             .padding(6)
@@ -29,9 +31,9 @@ struct RoomCell: View {
             VStack(spacing: 0){
                 HStack(alignment: .bottom){
                     Text(String.formatCurrency(value: room.price))
-                        .font(Font.custom("SF Pro Display", size: 30))
+                        .font(Fonts.customFontHeavy30px)
                     Text(room.pricePer)
-                        .font(Font.custom("SF Pro Display", size: 16))
+                        .font(Fonts.customFontRegular16px)
                         .foregroundColor(.gray)
                 }.padding(.trailing, 30)
                     BlueButtonExt(action: {showBookingView.toggle()}, text: "Выбрать номер")

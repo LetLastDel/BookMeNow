@@ -15,26 +15,26 @@ struct MainView: View {
         VStack{
             if let hotel = viewModel.hotel{
                 Text("Отель")
-                    .font(Font.custom("SF Pro Display", size: 18).weight(.medium))
+                    .font(Fonts.customFontMedium18px)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(alignment: .leading, spacing: 15){
-                        ImageGallery(urls: hotel.imageUrls )
+                        ImageGallery(urls: hotel.imageUrls)
                         HoratingStackExt(horating: hotel.rating , horatingName: hotel.ratingName)
                         VStack(alignment: .leading){
                             Text(hotel.name)
-                                .font(Font.custom("SF Pro Display", size: 22).weight(.bold))
+                                .font(Fonts.customFontHeavy22px)
                             Button(hotel.adress) {
                                 print("Нажата кнопка с адрессом")
                             }.frame(maxWidth: .infinity, alignment: .leading)
-                                .font(Font.custom("SF Pro Display", size: 14))
+                                .font(Fonts.customFontRegular14px)
                             Spacer(minLength: 10)
                             HStack{
                                 Text("от")
-                                    .font(Font.custom("SF Pro Display", size: 30).weight(.bold))
+                                    .font(Fonts.customFontHeavy30px)
                                 Text(String.formatCurrency(value: hotel.minimalPrice))
-                                    .font(Font.custom("SF Pro Display", size: 30).weight(.bold))
+                                    .font(Fonts.customFontHeavy30px)
                                 Text(hotel.priceForIt)
-                                    .font(Font.custom("SF Pro Display", size: 16))
+                                    .font(Fonts.customFontRegular16px)
                                     .foregroundColor(.gray)
                             }
                         }
@@ -47,15 +47,17 @@ struct MainView: View {
                     VStack{
                         VStack(alignment: .leading){
                             Text("Об отеле")
-                                .font(Font.custom("SF Pro Display", size: 22).weight(.bold))
-                            PeculiaritiesStackExt(peculiarities: hotel.aboutTheHotel.peculiarities)
+                                .font(Fonts.customFontHeavy22px)
+                            FlexibleView(data: hotel.aboutTheHotel.peculiarities) { pecul in
+                                PeculiaritiesHStaclExt(text: pecul)
+                            }
                             Text(hotel.aboutTheHotel.description)
-                                .font(Font.custom("SF Pro Display", size: 16).weight(.bold))
-
+                                .font(Fonts.customFontRegular16px)
                         }.padding(.horizontal, 13)
                         VStack(spacing: -4){
-                            ForEach(0..<viewModel.buttons.count) { text in
-                                ButtonExt(text: viewModel.buttons[text].0, image: viewModel.buttons[text].1)
+                            ForEach(0..<viewModel.buttons.count) { index in
+                                let isLastItem = (index == viewModel.buttons.count - 1)
+                                ButtonExt(text: viewModel.buttons[index].0, image: viewModel.buttons[index].1, showDivider: !isLastItem)
                             }
                         }.cornerRadius(10)
                             .padding()
@@ -67,22 +69,20 @@ struct MainView: View {
                 VStack{
                     BlueButtonExt(action: {showNextView.toggle()},text: "К выбору номера")
                 }.fullScreenCover(isPresented: $showNextView, content: {
-                        NavigationView {
-                            RoomView(hotel: hotel)
-                        }
+                    NavigationView {
+                        RoomView(hotel: hotel)
+                    }
                 })
                 .background(.white)
             } else {
                 ProgressView()
             }
         }
-
         .background(.gray.opacity(0.05))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-
-
 }
+
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()

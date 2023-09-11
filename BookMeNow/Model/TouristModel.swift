@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct TouristModel{
     var tourist: String = ""
     var name: String = ""

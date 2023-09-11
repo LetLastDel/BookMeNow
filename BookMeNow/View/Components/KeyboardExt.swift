@@ -11,6 +11,7 @@ struct KeyboardExt: View {
     @Binding var taped: Bool
     @Binding var date: Date
     @Binding var text: String
+    
     var dateFormatter : DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -28,8 +29,3 @@ struct KeyboardExt: View {
     }
 }
 
-//struct KeyboardExt_Previews: PreviewProvider {
-//    static var previews: some View {
-//        KeyboardExt()
-//    }
-//}
