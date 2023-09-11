@@ -10,7 +10,8 @@ import SwiftUI
 struct RoomCell: View {
     var room: RoomsModel.Rooms    
     @State var showBookingView = false
-    
+    @EnvironmentObject var coordinator: Coordinator
+
     var body: some View {
         VStack(alignment: .leading){
             ImageGallery(urls: room.imageUrls)
@@ -36,7 +37,7 @@ struct RoomCell: View {
                         .font(Fonts.customFontRegular16px)
                         .foregroundColor(.gray)
                 }.padding(.trailing, 30)
-                    BlueButtonExt(action: {showBookingView.toggle()}, text: "Выбрать номер")
+                BlueButtonExt(action: {coordinator.showBookingView()}, text: "Выбрать номер")
                         .shadow(color: .blue, radius: 0, x: 16, y: 0)
                         .shadow(color: .blue, radius: 0, x: -16, y: 0)
                         .shadow(color: .blue, radius: 0, x: 0, y: 5)
@@ -48,9 +49,6 @@ struct RoomCell: View {
         .ignoresSafeArea()
         .background(.white)
         .cornerRadius(20)
-        .fullScreenCover(isPresented: $showBookingView) {
-            BookingView()
-        }
     }
 }
 

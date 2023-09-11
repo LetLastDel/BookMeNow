@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel: ObservableObject {
+class HotelViewModel: ObservableObject {
     
     @Published var hotel: HotelModel?
     let buttons = [("Удобства", "smile"), ("Что включено", "ok") ,("Что не включено", "cancel")]

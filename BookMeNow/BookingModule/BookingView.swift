@@ -9,10 +9,10 @@ import SwiftUI
 
 struct BookingView: View {
     @StateObject var viewModel = BookingViewModel()
+    @EnvironmentObject var coordinator: Coordinator
     @State private var paymentButtonPressed = false
     @State var pushedPhoneTF = false
     private var maxTouristCount: Bool { viewModel.tourist.count >= 5 ? false : true }
-    @State var goToPaidView = false
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -100,13 +100,10 @@ struct BookingView: View {
                     VStack{
                         BlueButtonExt(action:{
                             paymentButtonPressed = true
-                            if viewModel.areAllFieldsFilled(){
-                                goToPaidView.toggle()
-                            }
-                        },text: "Оплатить")
-                        .fullScreenCover(isPresented: $goToPaidView, content: {
-                            PaidView()
-                        })
+                                 if viewModel.areAllFieldsFilled(){
+                            coordinator.showPaidView()
+                                }
+                        }, text: "Оплатить")
                     }
                     .ignoresSafeArea()
                     .background(.white)
@@ -121,6 +118,7 @@ struct BookingView: View {
         }        .onTapGesture {
             hideKeyboard()
         }
+        .navigationBarBackButtonHidden(true)
     }
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

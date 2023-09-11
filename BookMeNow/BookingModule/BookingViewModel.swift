@@ -28,6 +28,7 @@ class BookingViewModel: ObservableObject {
             return true
         }
     }
+    
     var phoneError: Bool{
         if number.isEmpty || isValidNumber == true{
             return false
@@ -35,6 +36,7 @@ class BookingViewModel: ObservableObject {
             return true
         }
     }
+    
 init(){
     tourist.append(TouristModel())
     getBooking(endPoint: EndPoint.booking)
@@ -69,6 +71,7 @@ func getBooking(endPoint: EndPoint) {
         }
     }
 }
+    
     func areAllFieldsFilled() -> Bool {
         if number.isEmpty || email.isEmpty {
             return false
@@ -82,6 +85,7 @@ func getBooking(endPoint: EndPoint) {
         }
         return true
     }
+    
     func formatPhoneNumber() -> String {
         var formatNum = ""
         let digits = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -100,11 +104,13 @@ func getBooking(endPoint: EndPoint) {
         }
         return formatNum
     }
+    
     func calculateFinalSum() -> String?{
         guard let booking else { return nil }
         let sum = booking.tourPrice + booking.serviceCharge + booking.fuelCharge
         return String.formatCurrency(value:sum)
     }
+    
     lazy var bookingData: [(String, String?)] = [
         ("Вылет из", self.booking?.departure),
         ("Страна, город", booking?.arrivalCountry),

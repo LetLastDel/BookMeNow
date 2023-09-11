@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct RoomView: View {
-    var hotel: HotelModel
+    var hotel: HotelModel?
     @StateObject var viewModel = RoomsViewModel()
-    @Environment(\.presentationMode) var presentationMode
-    
+    @EnvironmentObject var coordinator: Coordinator
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var body: some View {
         VStack{
-            TopBarStack(title: hotel.name, presentationMode: presentationMode)
+            TopBarStack(title: hotel?.name ?? "", presentationMode: presentationMode)
             if let room = viewModel.rooms?.rooms {
                 List{
                     ForEach(0..<room.count, id: \.self) { index in
                         RoomCell(room: room[index])
+                            .environmentObject(coordinator)
                     }.shadow(color: .white, radius: 0, x: 20, y: 0)
                         .shadow(color: .white, radius: 0, x: -20, y: 0)
                         .listRowBackground(Color.gray.opacity(0.06))
@@ -31,7 +33,8 @@ struct RoomView: View {
                 ProgressView()
                 Spacer()
             }
-        }
+        }.navigationBarBackButtonHidden(true)
+
     }
 }
 

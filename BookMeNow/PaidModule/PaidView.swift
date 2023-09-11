@@ -10,6 +10,9 @@ import SwiftUI
 struct PaidView: View {
     let randomNumber = Int.random(in: 1000...9000)
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var coordinator: Coordinator
+
+
 
     var body: some View {
         VStack{
@@ -25,16 +28,14 @@ struct PaidView: View {
                     .foregroundColor(.gray)
             }
            Spacer()
-        }
+        }        .navigationBarBackButtonHidden(true)
+
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
         .overlay(alignment: .bottom, content: {
             VStack{
                 BlueButtonExt(action: {
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                       let rootViewController = windowScene.windows.first?.rootViewController {
-                        rootViewController.dismiss(animated: true, completion: nil)
-                    }
+                    coordinator.goBackMain()
                 }, text: "Cупер!")
             }
             .ignoresSafeArea()

@@ -8,13 +8,13 @@
 import Foundation
 
 class RoomsViewModel: ObservableObject {
-    
     @Published var rooms: RoomsModel?
     @Published var loaded = false
     
     init(){
         getRooms(endPoint: EndPoint.room)
     }
+    
     func getRooms(endPoint: EndPoint) {
         Task{
             let motelInfo =  try await NetworkService.shared.getData(endPoint: endPoint) as RoomsModel
