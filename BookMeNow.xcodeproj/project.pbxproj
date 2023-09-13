@@ -28,6 +28,7 @@
 		2E71522B2AA4A1A000ED1DB5 /* TextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E71522A2AA4A1A000ED1DB5 /* TextExt.swift */; };
 		2E71522D2AA4A25A00ED1DB5 /* BlueButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E71522C2AA4A25A00ED1DB5 /* BlueButtonExt.swift */; };
 		2E98F9262AAB34300095E866 /* FontExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98F9252AAB34300095E866 /* FontExt.swift */; };
+		2EA947B22AB1B46E008B2437 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA947B12AB1B46E008B2437 /* ValidationService.swift */; };
 		2EAD69CE2AA07E130076D4F4 /* BookMeNowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD69CD2AA07E130076D4F4 /* BookMeNowApp.swift */; };
 		2EAD69D22AA07E140076D4F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAD69D12AA07E140076D4F4 /* Assets.xcassets */; };
 		2EAD69D52AA07E140076D4F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAD69D42AA07E140076D4F4 /* Preview Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		2E71522A2AA4A1A000ED1DB5 /* TextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExt.swift; sourceTree = "<group>"; };
 		2E71522C2AA4A25A00ED1DB5 /* BlueButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueButtonExt.swift; sourceTree = "<group>"; };
 		2E98F9252AAB34300095E866 /* FontExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExt.swift; sourceTree = "<group>"; };
+		2EA947B12AB1B46E008B2437 /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		2EAD69CA2AA07E130076D4F4 /* BookMeNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookMeNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD69CD2AA07E130076D4F4 /* BookMeNowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMeNowApp.swift; sourceTree = "<group>"; };
 		2EAD69D12AA07E140076D4F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +154,14 @@
 			path = Modifires;
 			sourceTree = "<group>";
 		};
+		2EA947B32AB1B947008B2437 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2EA947B12AB1B46E008B2437 /* ValidationService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		2EAD69C12AA07E130076D4F4 = {
 			isa = PBXGroup;
 			children = (
@@ -205,8 +215,8 @@
 		2EE1403F2AAF4C6A00771092 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				2EE1403B2AAF3B3000771092 /* Coordinator.swift */,
 				2EE1403D2AAF45A300771092 /* CoordinatorView.swift */,
+				2EE1403B2AAF3B3000771092 /* Coordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -269,6 +279,7 @@
 		2EE140472AAF4F4D00771092 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2EA947B32AB1B947008B2437 /* Service */,
 				2E1F35382AAA1FB90009FC8E /* KeyboardExt.swift */,
 				2EAD69F02AA0E7870076D4F4 /* TouristStackExt.swift */,
 			);
@@ -365,6 +376,7 @@
 				2EAD69EB2AA0C8090076D4F4 /* RoomView.swift in Sources */,
 				2EAD69F32AA0E9120076D4F4 /* TextFieldExt.swift in Sources */,
 				2EE1403C2AAF3B3000771092 /* Coordinator.swift in Sources */,
+				2EA947B22AB1B46E008B2437 /* ValidationService.swift in Sources */,
 				2EE140552AB0740900771092 /* TouristListView.swift in Sources */,
 				2E7152292AA49E2E00ED1DB5 /* HoratingStackExt.swift in Sources */,
 				2E0C6B7E2AA3B85D0010BDCD /* TopBarStack.swift in Sources */,

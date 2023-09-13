@@ -9,7 +9,6 @@ import Foundation
 
 class RoomsViewModel: ObservableObject {
     @Published var rooms: RoomsModel?
-    @Published var loaded = false
     
     init(){
         getRooms(endPoint: EndPoint.room)
@@ -20,7 +19,6 @@ class RoomsViewModel: ObservableObject {
             let motelInfo =  try await NetworkService.shared.getData(endPoint: endPoint) as RoomsModel
             DispatchQueue.main.async {
                 self.rooms = motelInfo
-                self.loaded.toggle()
             }
         }
     }

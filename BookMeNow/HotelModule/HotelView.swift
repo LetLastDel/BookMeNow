@@ -11,7 +11,6 @@ struct HotelView: View {
     @StateObject var viewModel = HotelViewModel()
     @EnvironmentObject var coordinator: Coordinator
 
-    @State var showNextView = false
     var body: some View {
             VStack{
                 if let hotel = viewModel.hotel{

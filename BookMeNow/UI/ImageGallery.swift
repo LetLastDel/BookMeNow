@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ImageGallery: View {
-    
     @State var backgroundOffset: CGFloat = 0
     @State var images: [UIImage]?
     var urls: [String]

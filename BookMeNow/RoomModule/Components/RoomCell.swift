@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RoomCell: View {
     var room: RoomsModel.Rooms    
-    @State var showBookingView = false
     @EnvironmentObject var coordinator: Coordinator
 
     var body: some View {

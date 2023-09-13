@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookingView: View {
+    
     @StateObject var viewModel = BookingViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @State private var paymentButtonPressed = false
@@ -18,10 +19,10 @@ struct BookingView: View {
     var body: some View {
         VStack{
             TopBarStack(title: "Бронирование", presentationMode: presentationMode)
-            if viewModel.booking != nil {
+          //  if viewModel.booking != nil {
                 ScrollView(.vertical, showsIndicators: false) {
                     BookingInfoView(viewModel: viewModel)
-                    TouristInfoView(viewModel: viewModel, pushedPhoneTF: $pushedPhoneTF, paymentButtonPressed: $paymentButtonPressed)
+                    TouristInfoView(viewModel: viewModel, validation: viewModel.validationService, pushedPhoneTF: $pushedPhoneTF, paymentButtonPressed: $paymentButtonPressed)
                     TouristListView(viewModel: viewModel, paymentButtonPressed: $paymentButtonPressed, maxTouristCount: maxTouristCount)
                     DataStackExt(data: viewModel.priceData, spacer: true)
                     Spacer()
@@ -43,11 +44,11 @@ struct BookingView: View {
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.gray.opacity(0.05))
-            } else {
-                Spacer()
-                ProgressView()
-                Spacer()
-            }
+//            } else {
+//                Spacer()
+//                ProgressView()
+//                Spacer()
+//            }
         }        .onTapGesture {
             hideKeyboard()
         }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TouristInfoView: View {
     @ObservedObject var viewModel: BookingViewModel
+    @ObservedObject var validation: ValidationService
     @Binding var pushedPhoneTF: Bool
     @Binding var paymentButtonPressed: Bool
     
@@ -18,24 +19,23 @@ struct TouristInfoView: View {
                 Text("Информация о покупателе")
                     .font(Fonts.customFontHeavy22px)
                 ZStack(alignment: .leadingLastTextBaseline) {
-                    TextFieldExt(fieldName: "Номер телефона", text: $viewModel.number, promt: viewModel.phoneError, paymentButtonPressed: paymentButtonPressed)
+                    TextFieldExt(fieldName: "Номер телефона", text: $validation.number, promt: validation.phoneError, paymentButtonPressed: paymentButtonPressed)
                         .keyboardType(.numberPad)
                         .foregroundColor(.clear)
-                        .onChange(of: viewModel.number) { newValue in
+                        .onChange(of: validation.number) { newValue in
                             DispatchQueue.main.async {
-                                viewModel.number = viewModel.number.formattedMask(text: viewModel.number, mask: "+X (XXX) XXX-XX-XX")
+                                validation.number = validation.number.formattedMask(text: validation.number, mask: "    (XXX) XXX-XX-XX")
                             }
                         }
                         .onTapGesture {
-                            viewModel.number = viewModel.prefix + viewModel.number
                             pushedPhoneTF = true
                         }
                     if pushedPhoneTF{
-                        Text(viewModel.formatPhoneNumber()).padding()
+                        Text(validation.formatPhoneNumber()).padding()
                             .allowsHitTesting(false)
                     }
                 }
-                TextFieldExt(fieldName: "Почта", text: $viewModel.email, promt: viewModel.emailError, paymentButtonPressed: paymentButtonPressed)
+                TextFieldExt(fieldName: "Почта", text: $validation.email, promt: validation.emailError, paymentButtonPressed: paymentButtonPressed)
                 Text("Эти данные никому не передаются. После оплаты мы вышлем чек на указанный Вами номер и почту")
                     .font(Fonts.customFontRegular14px)
                     .foregroundColor(.gray)
