@@ -11,9 +11,8 @@ import SwiftUI
 struct BookMeNowApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ContentView()
+                CoordinatorView()
+                .environmentObject(Coordinator())
             }
         }
-    }
 }
