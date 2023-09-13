@@ -20,57 +20,14 @@ class BookingViewModel: ObservableObject {
     private let numberPredicate = NSPredicate(format: "SELF MATCHES %@", Regex.phone.rawValue)
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@",  Regex.email.rawValue)
     private var cancellable: Set<AnyCancellable> = []
-
-    var emailError: Bool{
-        if email.isEmpty || isValidEmail == true {
-            return false
-        } else {
-            return true
-        }
-    }
+    var emailError: Bool { return !email.isEmpty && !isValidEmail }
+    var phoneError: Bool { return !number.isEmpty && !isValidNumber }
     
-    var phoneError: Bool{
-        if number.isEmpty || isValidNumber == true{
-            return false
-        } else {
-            return true
-        }
+    init(){
+        tourist.append(TouristModel())
+        getBooking(endPoint: EndPoint.booking)
+        validate()
     }
-    
-init(){
-    tourist.append(TouristModel())
-    getBooking(endPoint: EndPoint.booking)
-    $email
-        .debounce(for: 0.5, scheduler: RunLoop.main)
-        .map{ email in
-            return self.emailPredicate.evaluate(with: email)
-        }
-        .assign(to: \.isValidEmail, on: self)
-        .store(in: &cancellable)
-    $number
-        .debounce(for: 0.5, scheduler: RunLoop.main)
-        .map{ number in
-            return self.numberPredicate.evaluate(with: number)
-        }
-        .assign(to: \.isValidNumber, on: self)
-        .store(in: &cancellable)
-    
-    Publishers.CombineLatest($isValidEmail, $isValidNumber)
-        .map { email, number in
-            return (email && number)
-        }
-        .assign(to: \.canPush, on: self)
-        .store(in: &cancellable)
-}
-
-func getBooking(endPoint: EndPoint) {
-    Task{
-       let motelInfo =  try await NetworkService.shared.getData(endPoint: endPoint) as BookingModel
-        DispatchQueue.main.async {
-            self.booking = motelInfo
-        }
-    }
-}
     
     func areAllFieldsFilled() -> Bool {
         if number.isEmpty || email.isEmpty {
@@ -78,14 +35,37 @@ func getBooking(endPoint: EndPoint) {
         }
         for tourist in tourist {
             if tourist.name.isEmpty || tourist.surname.isEmpty ||
-               tourist.birthDate.isEmpty || tourist.nationality.isEmpty ||
-               tourist.passport.isEmpty || tourist.exp.isEmpty {
+                tourist.birthDate.isEmpty || tourist.nationality.isEmpty ||
+                tourist.passport.isEmpty || tourist.exp.isEmpty {
                 return false
             }
         }
         return true
     }
+
+    func calculateFinalSum() -> String?{
+        guard let booking else { return nil }
+        let sum = booking.tourPrice + booking.serviceCharge + booking.fuelCharge
+        return String.formatCurrency(value:sum)
+    }
     
+    lazy var bookingData: [(String, String?)] = [
+        ("Вылет из", booking?.departure),
+        ("Страна, город", booking?.arrivalCountry),
+        ("Даты", "\(booking?.tourDateStart ?? "") - \(booking?.tourDateStop ?? "")"),
+        ("Кол-во ночей", String(booking?.numberOfNights ?? 0) + " ночей"),
+        ("Отель", booking?.hotelName),
+        ("Номер", booking?.room),
+        ("Питание", booking?.nutrition)]
+    
+    lazy var priceData: [(String, String?)] = [
+        ("Тур", String.formatCurrency(value: booking?.tourPrice ?? 0)),
+        ("Топливный сбор", String.formatCurrency(value: booking?.fuelCharge ?? 0)),
+        ("Сервисный сбор", String.formatCurrency(value: booking?.serviceCharge ?? 0)),
+        ("К оплате", calculateFinalSum())]
+}
+
+extension BookingViewModel{
     func formatPhoneNumber() -> String {
         var formatNum = ""
         let digits = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -104,25 +84,41 @@ func getBooking(endPoint: EndPoint) {
         }
         return formatNum
     }
-    
-    func calculateFinalSum() -> String?{
-        guard let booking else { return nil }
-        let sum = booking.tourPrice + booking.serviceCharge + booking.fuelCharge
-        return String.formatCurrency(value:sum)
+}
+
+extension BookingViewModel {
+    func getBooking(endPoint: EndPoint) {
+        Task{
+            let motelInfo =  try await NetworkService.shared.getData(endPoint: endPoint) as BookingModel
+            DispatchQueue.main.async {
+                self.booking = motelInfo
+            }
+        }
     }
-    
-    lazy var bookingData: [(String, String?)] = [
-        ("Вылет из", self.booking?.departure),
-        ("Страна, город", booking?.arrivalCountry),
-        ("Даты", "\(booking?.tourDateStart ?? "") - \(booking?.tourDateStop ?? "")"),
-        ("Кол-во ночей", String(booking?.numberOfNights ?? 0) + " ночей"),
-        ("Отель", booking?.hotelName),
-        ("Номер", booking?.room),
-        ("Питание", booking?.nutrition)]
-    
-    lazy var priceData: [(String, String?)] = [
-        ("Тур", String.formatCurrency(value: booking?.tourPrice ?? 0)),
-        ("Топливный сбор", String.formatCurrency(value: booking?.fuelCharge ?? 0)),
-        ("Сервисный сбор", String.formatCurrency(value: booking?.serviceCharge ?? 0)),
-        ("К оплате", calculateFinalSum())]
-  }
+}
+
+extension BookingViewModel{
+    func validate(){
+        $email
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .map{ email in
+                return self.emailPredicate.evaluate(with: email)
+            }
+            .assign(to: \.isValidEmail, on: self)
+            .store(in: &cancellable)
+        $number
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .map{ number in
+                return self.numberPredicate.evaluate(with: number)
+            }
+            .assign(to: \.isValidNumber, on: self)
+            .store(in: &cancellable)
+        
+        Publishers.CombineLatest($isValidEmail, $isValidNumber)
+            .map { email, number in
+                return (email && number)
+            }
+            .assign(to: \.canPush, on: self)
+            .store(in: &cancellable)
+    }
+}
